@@ -1,0 +1,30 @@
+class Solution {
+    public void maze(int n,int open,int close,Stack<Character> s,ArrayList<String> ans){
+        if(open==close&&open==n){
+            StringBuilder string= new StringBuilder();
+            for(char c : s){
+                string.append(c);
+            }
+            ans.add(string.toString());
+            return;
+        }
+        if(open<n){
+            s.push('(');
+            maze(n,open+1,close,s,ans);
+            s.pop();
+
+        }
+        if(close<open){
+            s.push(')');
+            maze(n,open,close+1,s,ans);
+            s.pop();
+        }
+    }
+    public List<String> generateParenthesis(int n) {
+       Stack<Character> s= new Stack<>();
+       ArrayList<String> ans= new ArrayList<>();
+       maze(n,0,0,s,ans); 
+       return ans;
+    }
+
+}
